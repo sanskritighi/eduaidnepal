@@ -44,7 +44,6 @@ useEffect(() => {
 
 
 
-
 const addSubject = () => {
     setIsEdit(false)
     setFormData({...emptyFormData,category:selectOptions[0].value})
@@ -75,10 +74,11 @@ const deleteSubject=(course)=>{
         }
     )
 }
-
+                    //............................................................................. This state is for selectOptions...............................................................//
 const onCategoryChange=(e)=>{
   setFormData({...formData,category:e.target.value})
 }
+
 
 
 
@@ -90,6 +90,9 @@ const SubjectForm = () => {
       };
       const handleSubmit = (e) => {
         e.preventDefault();
+
+
+//--------------------------------------------------------------API for Edit Subject--------------------------------------------------------------//
 
         if(isEdit){
             axios.patch(`/subject_update/${formData.id}/`,{name:name,code:code,category:category}).then(
@@ -110,6 +113,9 @@ const SubjectForm = () => {
                 }
             )
         }
+
+        //-----------------------------------------------------API for Post Subject-------------------------------------------------------------------------------------//
+
         else{
             axios.post(`/subject_create/`,{name:name,code:code,category:category}).then(
                 ()=>{
@@ -126,6 +132,7 @@ const SubjectForm = () => {
           }).finally(
                 ()=>{
                     setModalOpen(false)
+                    refetch()
                 }
             )
   
@@ -139,6 +146,10 @@ const SubjectForm = () => {
                     <label htmlFor="category" className="block text-sm font-medium text-gray-700">
                         Category <span className="text-red-500">*</span>
                     </label>
+
+                    {/* .........................................................FOR SELECTOPTIONS....................................................................... */}
+
+
                     <select required value={formData.category} onChange={onCategoryChange} id='category' name='category' className='w-full mt-1 p-2 cursor-pointer outline-gray-300 rounded bg-transparent outline outline-1'>
                       {
                         selectOptions?.map(item=>
@@ -178,6 +189,12 @@ const SubjectForm = () => {
                     />
                 </div>
 
+
+
+{/* ............................................................FOR ADD & UPDATE BUTTON ........................................................................ */}
+
+
+
                 <div className="flex justify-end">
                     <button
                         type="submit"
@@ -190,11 +207,6 @@ const SubjectForm = () => {
         </>
     )
 }
-
-
-
-
-
 
   if (isLoading) {
     return (
@@ -218,9 +230,9 @@ const SubjectForm = () => {
             <table className="min-w-full bg-white">
                 <thead>
                     <tr className='text-left font-semibold bg-gray-500 text-gray-200'>
-                    <th className="py-3 px-4 border-b ">
+                    {/* <th className="py-3 px-4 border-b ">
                             Course
-                        </th>
+                        </th> */}
                         <th className="py-3 px-4 border-b ">
                             Name
                         </th>
@@ -242,9 +254,9 @@ const SubjectForm = () => {
                 <tbody>
                     {subjects?.map((sub) => (
                         <tr key={sub.id}>
-                            <td className="py-4 px-6 border-b">
+                            {/* <td className="py-4 px-6 border-b">
                             <Link className='text-blue-700' to={`/course/${sub.category}`}>{sub.category_name}</Link>
-                            </td>
+                            </td> */}
                             <td className="py-4 px-6 border-b">
                               {sub.name}
                             </td>

@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 import {useGET} from '../hooks/useApi'
 import { formatAPIDate } from '../utils/Dates'
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -15,16 +15,31 @@ const Addcourses = () => {
         slug: '',
     }
 
-
-
     const [isEdit, setIsEdit] = useState(false)
     const [isModalOpen, setModalOpen] = useState(false)
     const [formData, setFormData] = useState(emptyFormData);
-
+    const { data:courseList,refetch,setData:setCourseList} = useGET('category_view/') 
     
-    const { data:courseList,refetch } = useGET('category_view/')    
-        
+    const [searchTerm,setSearchTerm]=useState('');
+    
+    
+    const onChange =(event )=>{
+        setSearchTerm(event.target.value);
+        onSearch(event.target.value);
+    }
 
+    const onSearch =(searchTerm) =>{
+        //our api//
+        axios.get(`search_categorys/?search=${searchTerm}`)
+        .then(res=>{
+                    setCourseList(res.data);
+                })
+                .catch(err =>{console.log(err)
+                }); 
+        
+        console.log('search',searchTerm);
+
+    }    
     const addCourse = () => {
         setIsEdit(false)
         setFormData(emptyFormData)
@@ -58,6 +73,8 @@ const Addcourses = () => {
 
 
 
+
+
     const CourseForm = () => {
           const { name, slug } = formData;
           const handleChange = (e) => {
@@ -65,6 +82,9 @@ const Addcourses = () => {
           };
           const handleSubmit = (e) => {
             e.preventDefault();
+
+            //----------------------------------------------Api for performing Course Edit-------------------------------------------------//
+
             if(isEdit){
                 axios.patch(`/category_update/${formData.id}/`,{name:name,slug:slug}).then(
                     ()=>{
@@ -80,8 +100,11 @@ const Addcourses = () => {
                     }
                 )
             }
+
+
+            //----------------------------------------------------API for category create--------------------------------------------//
             else{
-                axios.post(`/category_create/`,{name:name,slug:slug}).then(
+                axios.post(`/category_creates/`,{name:name,slug:slug}).then(
                     ()=>{
                         toast.success('Added successfully')
                         refetch()
@@ -150,6 +173,23 @@ const Addcourses = () => {
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Course List</h2>
+
+                {/* ............................................For SearchButton............................................................ */}
+
+
+                <div>
+                    <input  type="text"
+                    placeholder="Search..."
+                    value={searchTerm}
+                     onChange={onChange}
+        
+                    className='border p-2 rounded-2xl w-64 pl-12' />
+
+                    <button  onClick={()=>onSearch(searchTerm)} className='bg-blue-500 text-white py-1 rounded-xl focus:outline-none px-8 m-2'>Search</button>
+                </div>
+
+
+
                 <button onClick={addCourse} className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">
                     <AiOutlinePlus className="w-5 h-5 mr-2 inline-block" />
                     Add Course

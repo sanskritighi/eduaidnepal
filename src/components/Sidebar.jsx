@@ -96,6 +96,9 @@ const Sidebar = ({ open, toggleSidebar }) => {
         { name: "Profile", link: "/profile", icon: CgProfile, has_submenus: false },
         { name: "Course", link: "/course", icon: GiOpenBook, has_submenus: false },
         { name: "Exam", link: "/exam", icon: BsPencilSquare, margin: true, has_submenus: false },
+        { name: "Add Courses", link: "/addcourse", icon: ImAddressBook, has_submenus: false},
+        { name: "Add Subject", link: "/addsubject", icon: MdOutlineAddCard, has_submenus: false },
+        
         {
             name: "Settings",
             link:"/settings",
@@ -103,12 +106,11 @@ const Sidebar = ({ open, toggleSidebar }) => {
             has_submenus: true,
             submenus: [
                 { name: "Change password", link: "/changepass", icon: MdOutlinePassword },
-                { name: "Add Courses", link: "/addcourse", icon: ImAddressBook },
-                { name: "Add Subject", link: "/addsubject", icon: MdOutlineAddCard },
+                { name: "Category select", link: "/categoryselect", icon: TbCategory},
+               
             ]
         },
        
-        { name: "Category select", link: "/categoryselect", icon: TbCategory, margin: true, has_submenus: false },
       
         {
             name: "Advertisment",

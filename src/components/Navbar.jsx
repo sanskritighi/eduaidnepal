@@ -38,6 +38,12 @@ const Navbar = () => {
             <li className="block px-3 py-2 rounded">
               <NavLink to='/blogs' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Blogs</NavLink>
             </li>
+            <li className="block px-3 py-2 rounded">
+              <NavLink to='/courses2' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Course</NavLink>
+            </li>
+            <li className="block px-3 py-2 rounded">
+              <NavLink to='/contact' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Contact</NavLink>
+            </li>
            
 
           </ul>
@@ -66,9 +72,13 @@ const Navbar = () => {
               <li className="block px-3 py-2 rounded">
                 <NavLink to='/blogs' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Blogs</NavLink>
               </li>
+              <li className="block px-3 py-2 rounded">
+              <NavLink to='/course2' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Course2</NavLink>
+            </li>
+            <li className="block px-3 py-2 rounded">
+              <NavLink to='/contact' className={({ isActive }) => isActive ? 'text-blue-500 pb-1' : 'text-gray-700'} >Contact</NavLink>
+            </li>
               
-
-
               {/* again for button */}
 
               <li className='  gap-2 border-l-2 border-t-red-500 my-2' >

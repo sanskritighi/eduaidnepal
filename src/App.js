@@ -17,6 +17,8 @@ import { Advertisment } from "./pages/Advertisment";
 import { Area } from "./pages/Area";
 import CourseSubjects from "./pages/CourseSubjects";
 import AdminProfile from "./components/AdminProfile";
+import Contact from "./pages/Contact";
+import Courses2 from "./pages/Courses2";
 
 function App() {
   return (
@@ -25,7 +27,10 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/courses2" element={<Courses2 />} />
         </Route>
+
         <Route element={<Protected />}>
           <Route element={<PrivateLayout />}>
             <Route path="/profile" element={<AdminProfile />} />
@@ -40,7 +45,6 @@ function App() {
             <Route path="/course" element={<Course />} />
             <Route path="course">
               <Route path=":id" element={<CourseSubjects />} />
-              {/* <Route path="" element={<CourseSubjects/>}/> */}
             </Route>
           </Route>
         </Route>

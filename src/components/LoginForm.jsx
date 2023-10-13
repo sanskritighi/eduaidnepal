@@ -10,7 +10,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(''); 
+  // const [selectedOption, setSelectedOption] = useState(''); 
   const [error, setError] = useState({
     email:null,
     password:null,
@@ -31,10 +31,10 @@ function LoginForm() {
   };
 
 
-  const Radioption = (e) => {
-    setError({...error,admin:null,student:null,teacher:null})
-    setSelectedOption(e.target.value);
-  };
+  // const Radioption = (e) => {
+  //   setError({...error,admin:null,student:null,teacher:null})
+  //   setSelectedOption(e.target.value);
+  // };
  
 
   const handleAPIError = (error) => {
@@ -46,22 +46,22 @@ function LoginForm() {
   const handleSuccess = () => {
     setError("");
 
-     if (handleValidation()){
-      if(selectedOption ==='option1'){
+    //  if (handleValidation()){
+    //   if(selectedOption ==='option1'){
         
-        navigate('/profile', { replace: true })
-      }
-      if(selectedOption ==='option2'){
-        navigate('/profile', { replace: true })
-      }
-      if(selectedOption ==='option3'){
-        navigate('/profile', { replace: true })
-      }
-    }
+    //     navigate('/profile', { replace: true })
+    //   }
+    //   if(selectedOption ==='option2'){
+    //     navigate('/profile', { replace: true })
+    //   }
+    //   if(selectedOption ==='option3'){
+    //     navigate('/profile', { replace: true })
+    //   }
+    // }
     
-        // navigate('/profile', { replace: true })
-      
-    // Do something on successful login, e.g. close the modal
+        navigate('/profile', { replace: true })
+       
+    
   };
 
   const handleSubmit = async (e) => {
@@ -96,10 +96,10 @@ function LoginForm() {
       allOk=false
     }
 
-    if(selectedOption== ''){
-      setError({...error,selectedOption:'Please select an option.'})
-      allOk=false
-    }
+    // if(selectedOption== ''){
+    //   setError({...error,selectedOption:'Please select an option.'})
+    //   allOk=false
+    // }
    
     return allOk
   }
@@ -130,7 +130,7 @@ function LoginForm() {
 
           {/* for Radiobutton */}
           
-          <div className="grid grid-cols-3 gap-1">
+          {/* <div className="grid grid-cols-3 gap-1">
           
             <label htmlFor="admin" className="flex gap-2  hover:ring-1  border-gray-600 rounded px-2 py-1 cursor-pointer ">
               <input id='admin' type="radio" value='option1' name='usertype' checked={selectedOption === "option1"}
@@ -155,10 +155,10 @@ function LoginForm() {
             </label>
            
            
-          </div>
-          <div className="flex justify-center items-center">
+          </div> */}
+          {/* <div className="flex justify-center items-center">
             {error?.selectedOption && <p className="text-red-300">{error?.selectedOption}</p>}
-            </div>
+            </div> */}
           {/* for button */}
           <div>
             <button
